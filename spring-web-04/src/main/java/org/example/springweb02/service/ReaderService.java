@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.example.springweb02.entity.Book;
 import org.example.springweb02.entity.Reader;
 import org.example.springweb02.model.request.ReaderCreationRequest;
+import org.example.springweb02.model.request.ReaderUpdateRequest;
 import org.example.springweb02.model.response.BookResponse;
 import org.example.springweb02.model.response.ReaderResponse;
 import org.example.springweb02.repository.ReaderRepository;
@@ -43,14 +44,10 @@ public class ReaderService {
         return objectMapper.convertValue(reader, ReaderResponse.class);
     }
 
-    public ReaderResponse updateReader(int id, ReaderCreationRequest request) {
-        Reader reader = objectMapper.convertValue(request, Reader.class);
-        reader.setName(request.getName());
-        reader.setAddress(request.getAddress());
-        reader.setEmail(reader.getEmail());
-        reader.setPhone(reader.getPhone());
-        readerRepository.save(reader);
+    public ReaderResponse updateReader(int id, ReaderUpdateRequest request) {
+     request.setId(id);
 
-        return objectMapper.convertValue(reader, ReaderResponse.class);
+     readerRepository.updateReader(request);
+     return objectMapper.convertValue(request, ReaderResponse.class);
     }
 }

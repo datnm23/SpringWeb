@@ -3,6 +3,7 @@ package org.example.springweb02.rest;
 import lombok.AllArgsConstructor;
 import org.example.springweb02.entity.Reader;
 import org.example.springweb02.model.request.ReaderCreationRequest;
+import org.example.springweb02.model.request.ReaderUpdateRequest;
 import org.example.springweb02.model.response.ReaderResponse;
 import org.example.springweb02.service.ReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,8 @@ public class ReaderResource {
     }
 
     @PutMapping("/{id}")
-    public ReaderResponse updateReader(@PathVariable Integer id, @RequestBody ReaderCreationRequest readerCreationRequest) {
-        return readerService.updateReader(id,readerCreationRequest);
+    public ReaderResponse updateReader(@PathVariable Integer id, @RequestBody ReaderUpdateRequest readerUpdateRequest) {
+        return readerService.updateReader(id,readerUpdateRequest);
     }
 
     @DeleteMapping("/{id}")

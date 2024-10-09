@@ -1,6 +1,7 @@
 package org.example.springweb02.repository;
 
 import org.example.springweb02.entity.Reader;
+import org.example.springweb02.model.request.ReaderUpdateRequest;
 import org.example.springweb02.util.file.FileUtil;
 import org.springframework.stereotype.Repository;
 
@@ -53,4 +54,17 @@ public class ReaderRepository {
         return null;
     }
 
+    public void updateReader(ReaderUpdateRequest readerUpdateRequest) {
+        List<Reader> readers = getAll();
+        for (int i = 0; i < readers.size(); i++) {
+            if (readers.get(i).getId() == readerUpdateRequest.getId()) {
+                readers.get(i).setName(readerUpdateRequest.getName());
+                readers.get(i).setAddress(readerUpdateRequest.getAddress());
+                readers.get(i).setEmail(readerUpdateRequest.getEmail());
+                readers.get(i).setPhone(readerUpdateRequest.getPhone());
+                break;
+            }
+        }
+        readerFileUtil.writeDataToFile(readers, fileName);
+    }
 }
